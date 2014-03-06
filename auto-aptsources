@@ -1,0 +1,51 @@
+mv /etc/apt/sources.list /etc/apt/sources.list.original
+
+cat << EOF > /etc/apt/sources.list
+
+# generic sources.list file specifically for ubuntu server 12.04.x
+
+deb http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise main restricted
+deb-src http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise main restricted
+
+deb http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise-updates main restricted
+deb-src http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise-updates main restricted
+
+deb http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise universe
+deb-src http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise universe
+deb http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise-updates universe
+deb-src http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise-updates universe
+
+deb http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise multiverse
+deb-src http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise multiverse
+deb http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise-updates multiverse
+deb-src http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise-updates multiverse
+
+deb http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise-backports main restricted universe multiverse
+deb-src http://192.168.0.146:3142/us.archive.ubuntu.com/ubuntu/ precise-backports main restricted universe multiverse
+
+deb http://192.168.0.146:3142/security.ubuntu.com/ubuntu precise-security main restricted
+deb-src http://192.168.0.146:3142/security.ubuntu.com/ubuntu precise-security main restricted
+deb http://192.168.0.146:3142/security.ubuntu.com/ubuntu precise-security universe
+deb-src http://192.168.0.146:3142/security.ubuntu.com/ubuntu precise-security universe
+deb http://192.168.0.146:3142/security.ubuntu.com/ubuntu precise-security multiverse
+deb-src http://192.168.0.146:3142/security.ubuntu.com/ubuntu precise-security multiverse
+
+# repositories for webmin, copy/pasted from webmin.com march 2014
+
+deb http://192.168.0.146:3142/download.webmin.com/download/repository sarge contrib
+deb http://192.168.0.146:3142/webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib
+
+
+EOF
+
+wget http://www.webmin.com/jcameron-key.asc && apt-key add jcameron-key.asc 
+
+apt-get update
+
+apt-get -y upgrade
+
+apt-get -y install webmin
+
+apt-get -y install linux-image-generic-lts-raring
+
+apt-get -y install linux-headers-generic-lts-raring
